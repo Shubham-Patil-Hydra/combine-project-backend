@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages{
+        stage('pull'){
+            steps{
+                git branch: 'dev', url: 'https://github.com/Shubham-Patil-Hydra/combine-project-backend.git'
+            }
+        }
+        stage('build'){
+            
+        }
+    }
+}
