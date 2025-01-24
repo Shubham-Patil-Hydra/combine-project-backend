@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages{
+        stage('pull'){
+            steps{
+                git branch: 'dev', url: 'https://github.com/Shubham-Patil-Hydra/combine-project-backend.git'
+            }
+        }
+        stage('build'){
+            steps{
+            sh 'mvn clean package'
+            }
+        }
+        stage('deploy'){
+            steps{
+                sh '''
+                    docker build . -t hydra9/com-backend:latest
+                    docker push hydra9/com-backend:latest
+                    docker rmi hydra9/com-backend:latest
+                    kubectl apply -f ./yaml/
+                '''
+            }
+        }
+    }
+}
