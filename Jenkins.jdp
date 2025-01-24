@@ -7,7 +7,19 @@ pipeline {
             }
         }
         stage('build'){
-            
+            steps{
+            sh 'mvn clean package'
+            }
+        }
+        stage('deploy'){
+            steps{
+                sh '''
+                    docker build . -t hydra9/com-backend:latest
+                    docker push hydra9/com-backend:latest
+                    docker rmi hydra9/com-backend:latest
+                    kubectl apply -f ./yaml/
+                '''
+            }
         }
     }
 }
