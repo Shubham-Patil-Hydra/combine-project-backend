@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: com-backend-app
-          image: mayurwagh/com-backend:latest
+          image: hydra9/com-backend:latest
           ports:
             - containerPort: 8080
